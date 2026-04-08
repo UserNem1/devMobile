@@ -33,6 +33,12 @@ public class CalculatriceActivity extends AppCompatActivity {
 
     private TextView textViewCalcul;
 
+
+    private Double premierElement = 0.0;
+    private Double deuxiemeElement = 0.0;
+    private Double resultat = 0.0;
+    private TypeOperation typeOperation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,21 +66,57 @@ public class CalculatriceActivity extends AppCompatActivity {
         buttonTimes = findViewById(R.id.buttonTimes);
         buttonDivide = findViewById(R.id.buttonDivide);
 
-        button0.setOnClickListener(v -> textViewCalcul.append("0"));
-        button1.setOnClickListener(v -> textViewCalcul.append("1"));
-        button2.setOnClickListener(v -> textViewCalcul.append("2"));
-        button3.setOnClickListener(v -> textViewCalcul.append("3"));
-        button4.setOnClickListener(v -> textViewCalcul.append("4"));
-        button5.setOnClickListener(v -> textViewCalcul.append("5"));
-        button6.setOnClickListener(v -> textViewCalcul.append("6"));
-        button7.setOnClickListener(v -> textViewCalcul.append("7"));
-        button8.setOnClickListener(v -> textViewCalcul.append("8"));
-        button9.setOnClickListener(v -> textViewCalcul.append("9"));
+        button0.setOnClickListener(v -> AppuieBoutonChiffre(0));
+        button1.setOnClickListener(v -> AppuieBoutonChiffre(1));
+        button2.setOnClickListener(v -> AppuieBoutonChiffre(2));
+        button3.setOnClickListener(v -> AppuieBoutonChiffre(3));
+        button4.setOnClickListener(v -> AppuieBoutonChiffre(4));
+        button5.setOnClickListener(v -> AppuieBoutonChiffre(5));
+        button6.setOnClickListener(v -> AppuieBoutonChiffre(6));
+        button7.setOnClickListener(v -> AppuieBoutonChiffre(7));
+        button8.setOnClickListener(v -> AppuieBoutonChiffre(8));
+        button9.setOnClickListener(v -> AppuieBoutonChiffre(9));
 
-        buttonPlus.setOnClickListener(v -> textViewCalcul.append("+"));
-        buttonMinus.setOnClickListener(v -> textViewCalcul.append("-"));
-        buttonTimes.setOnClickListener(v -> textViewCalcul.append("*"));
-        buttonDivide.setOnClickListener(v -> textViewCalcul.append("/"));
+        buttonPlus.setOnClickListener(v -> AppuieBoutonTypeOperation('+'));
+        buttonMinus.setOnClickListener(v -> AppuieBoutonTypeOperation('-'));
+        buttonTimes.setOnClickListener(v -> AppuieBoutonTypeOperation('x'));
+        buttonDivide.setOnClickListener(v -> AppuieBoutonTypeOperation('/'));
+    }
+
+    private void AppuieBoutonChiffre(Integer chiffre){
+        if(typeOperation == null)
+            premierElement = premierElement * 10 + chiffre;
+        else
+            deuxiemeElement = deuxiemeElement * 10 + chiffre;
+
+        majTextView();
+    }
+    private void AppuieBoutonTypeOperation(char operation){
+        switch (operation) {
+            case '+' :
+                typeOperation = TypeOperation.ADD;
+                break;
+            case '-' :
+                typeOperation = TypeOperation.SUBSTRACT;
+                break;
+            case '/' :
+                typeOperation = TypeOperation.DIVIDE;
+                break;
+            case 'x' :
+                typeOperation = TypeOperation.MULTIPLY;
+                break;
+            default :
+                break;
+        }
+
+        majTextView();
+    }
+
+    private void majTextView() {
+        if(typeOperation == null)
+            textViewCalcul.setText(premierElement.toString());
+        else
+            textViewCalcul.setText(premierElement.toString() + typeOperation.getSymbole() + deuxiemeElement.toString());
     }
 
     @Override

@@ -7,7 +7,7 @@
     <string name="calc_textview" translatable="false">TextView</string>
     <string name="calc_plus" translatable="false">+</string>
     <string name="calc_minus" translatable="false">-</string>
-    <string name="calc_times" translatable="false">*</string>
+    <string name="calc_times" translatable="false">x</string>
     <string name="calc_divide" translatable="false">/</string>
     <string name="calc_0" translatable="false">0</string>
     <string name="calc_1" translatable="false">1</string>
