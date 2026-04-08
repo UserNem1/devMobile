@@ -1,0 +1,33 @@
+<resources>
+    <!--Accueil-->
+    <string name="app_name" translatable="false">calcDevMobile</string>
+    <string name="text_bouton_calculatrice">Test</string>
+
+    <!--Calc-->
+    <string name="calc_textview" translatable="false">TextView</string>
+    <string name="calc_plus" translatable="false">+</string>
+    <string name="calc_minus" translatable="false">-</string>
+    <string name="calc_times" translatable="false">*</string>
+    <string name="calc_divide" translatable="false">/</string>
+    <string name="calc_0" translatable="false">0</string>
+    <string name="calc_1" translatable="false">1</string>
+    <string name="calc_2" translatable="false">2</string>
+    <string name="calc_3" translatable="false">3</string>
+    <string name="calc_4" translatable="false">4</string>
+    <string name="calc_5" translatable="false">5</string>
+    <string name="calc_6" translatable="false">6</string>
+    <string name="calc_7" translatable="false">7</string>
+    <string name="calc_8" translatable="false">8</string>
+    <string name="calc_9" translatable="false">9</string>
+    <string name="text_menu_raz">raz</string>
+
+    <!--Historique-->
+
+
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+    <string name="lorem_ipsum" translatable="false">Lorem Ipsum</string>
+    <string name="first_fragment_label" translatable="false">FirstFragmentLabel</string>
+    <string name="second_fragment_label" translatable="false">SecondFragmentLabel</string>
+    <string name="action_settings" translatable="false">ActionSettings</string>
+</resources>
