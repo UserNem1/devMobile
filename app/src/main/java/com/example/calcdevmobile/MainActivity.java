@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button boutonCalc;
     private Button boutonHist;
+    private Button boutonCalcMental;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, HistoriqueActivity.class);
             startActivity(intent);
             Toast.makeText(this,"Historique lancé",Toast.LENGTH_LONG).show();
+        });
+        //Calcul Mental
+        boutonCalcMental = findViewById(R.id.buttonCalcMental);
+        boutonCalcMental.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CalculMentalActivity.class);
+            startActivity(intent);
+            Toast.makeText(this,"Calcul Mental lancé",Toast.LENGTH_LONG).show();
         });
     }
 }

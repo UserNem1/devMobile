@@ -27,5 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Historique" />
+
+        <Button
+            android:id="@+id/buttonCalcMental"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calcul Mental" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
