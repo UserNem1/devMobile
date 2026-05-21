@@ -89,6 +89,9 @@ public class CalculMentalActivity extends AppCompatActivity {
             BonneReponse();
         else
             MauvaiseReponse();
+
+        input = 0.0;
+        majTextView();
     }
     private void OppositeResult(){
         input = -input;

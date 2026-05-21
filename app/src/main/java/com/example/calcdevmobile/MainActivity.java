@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
         //Calcul Mental
         boutonCalcMental = findViewById(R.id.buttonCalcMental);
         boutonCalcMental.setOnClickListener(v -> {
+            Toast.makeText(this,"Calcul Mental lancé",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, CalculMentalActivity.class);
             startActivity(intent);
-            Toast.makeText(this,"Calcul Mental lancé",Toast.LENGTH_LONG).show();
         });
     }
 }
