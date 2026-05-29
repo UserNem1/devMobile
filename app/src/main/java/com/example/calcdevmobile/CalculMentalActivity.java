@@ -3,6 +3,7 @@ package com.example.calcdevmobile;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,6 +75,8 @@ public class CalculMentalActivity extends AppCompatActivity {
         button9.setOnClickListener(v -> AppuieBoutonChiffre(9));
         buttonEquals.setOnClickListener(v -> SubmitResult());
         buttonMinus.setOnClickListener(v -> OppositeResult());
+
+        NouveauCalcul();
     }
 
     private void AppuieBoutonChiffre(Integer chiffre){
@@ -84,14 +87,35 @@ public class CalculMentalActivity extends AppCompatActivity {
     private void majTextView() {
         textViewInput.setText(input.toString());
     }
+    private void majCalcTextView(){
+        switch(typeOperation){
+            case ADD:
+                textViewCalcul.setText(premierElement.toString() + " + " + deuxiemeElement.toString());
+                break;
+            case SUBSTRACT:
+                textViewCalcul.setText(premierElement.toString() + " - " + deuxiemeElement.toString());
+                break;
+            case DIVIDE:
+                textViewCalcul.setText(premierElement.toString() + " / " + deuxiemeElement.toString());
+                break;
+            case MULTIPLY:
+                textViewCalcul.setText(premierElement.toString() + " * " + deuxiemeElement.toString());
+                break;
+        }
+    }
     private void SubmitResult(){
-        if (input == resultat)
+        if (input.equals(resultat)) {
             BonneReponse();
-        else
+            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_LONG).show();
+        }
+        else {
             MauvaiseReponse();
+            Toast.makeText(this,"Mauvaise réponse",Toast.LENGTH_LONG).show();
+        }
 
         input = 0.0;
         majTextView();
+        NouveauCalcul();
     }
     private void OppositeResult(){
         input = -input;
@@ -112,27 +136,25 @@ public class CalculMentalActivity extends AppCompatActivity {
     private void NouveauCalcul(){
         premierElement = 1.0;
         deuxiemeElement = 1.0;
-        char operation = '+';
+        typeOperation = TypeOperation.ADD;
 
-        switch (operation) {
-            case '+' :
+        switch (typeOperation) {
+            case ADD:
                 resultat = premierElement + deuxiemeElement;
-                typeOperation = TypeOperation.ADD;
                 break;
-            case '-' :
+            case SUBSTRACT:
                 resultat = premierElement - deuxiemeElement;
-                typeOperation = TypeOperation.SUBSTRACT;
                 break;
-            case '/' :
+            case DIVIDE:
                 resultat = premierElement / deuxiemeElement;
-                typeOperation = TypeOperation.DIVIDE;
                 break;
-            case 'x' :
+            case MULTIPLY:
                 resultat = premierElement * deuxiemeElement;
-                typeOperation = TypeOperation.MULTIPLY;
                 break;
             default :
                 break;
         }
+
+        majCalcTextView();
     }
 }
