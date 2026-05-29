@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.zip.DeflaterOutputStream;
+
 public class CalculMentalActivity extends AppCompatActivity {
     private TextView textViewCalcul;
     private TextView textViewInput;
@@ -90,16 +92,16 @@ public class CalculMentalActivity extends AppCompatActivity {
     private void majCalcTextView(){
         switch(typeOperation){
             case ADD:
-                textViewCalcul.setText(premierElement.toString() + " + " + deuxiemeElement.toString());
+                textViewCalcul.setText(premierElement + " + " + deuxiemeElement);
                 break;
             case SUBSTRACT:
-                textViewCalcul.setText(premierElement.toString() + " - " + deuxiemeElement.toString());
+                textViewCalcul.setText(premierElement + " - " + deuxiemeElement);
                 break;
             case DIVIDE:
-                textViewCalcul.setText(premierElement.toString() + " / " + deuxiemeElement.toString());
+                textViewCalcul.setText(premierElement + " / " + deuxiemeElement);
                 break;
             case MULTIPLY:
-                textViewCalcul.setText(premierElement.toString() + " * " + deuxiemeElement.toString());
+                textViewCalcul.setText(premierElement + " * " + deuxiemeElement);
                 break;
         }
     }
@@ -134,22 +136,27 @@ public class CalculMentalActivity extends AppCompatActivity {
     }
 
     private void NouveauCalcul(){
-        premierElement = 1.0;
-        deuxiemeElement = 1.0;
-        typeOperation = TypeOperation.ADD;
+        //0 - 99
+        int premRNG = (int)(Math.random() * 100);
+        int deuxRNG = (int)(Math.random() * 100);
+        //elements
+        premierElement = Double.valueOf(premRNG);
+        deuxiemeElement = Double.valueOf(deuxRNG);
+        //operation
+        int operation = (int)(Math.random() * 3);
 
-        switch (typeOperation) {
-            case ADD:
+        switch (operation) {
+            case 0:
                 resultat = premierElement + deuxiemeElement;
+                typeOperation = TypeOperation.ADD;
                 break;
-            case SUBSTRACT:
+            case 1:
                 resultat = premierElement - deuxiemeElement;
+                typeOperation = TypeOperation.SUBSTRACT;
                 break;
-            case DIVIDE:
-                resultat = premierElement / deuxiemeElement;
-                break;
-            case MULTIPLY:
+            case 2:
                 resultat = premierElement * deuxiemeElement;
+                typeOperation = TypeOperation.MULTIPLY;
                 break;
             default :
                 break;
