@@ -1,5 +1,6 @@
 package com.example.calcdevmobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,7 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.zip.DeflaterOutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CalculMentalActivity extends AppCompatActivity {
     private TextView textViewCalcul;
@@ -28,6 +30,7 @@ public class CalculMentalActivity extends AppCompatActivity {
     private Button button9;
     private Button buttonEquals;
     private Button buttonMinus;
+    private Button buttonErase;
 
 
     private Double input = 0.0;
@@ -38,6 +41,15 @@ public class CalculMentalActivity extends AppCompatActivity {
 
     private int bonnesReponses = 0;
     private int mauvaisesReponses = 0;
+
+
+    private Timer timer = new Timer();
+    private TimerTask timerTask = new TimerTask(){
+        @Override
+        public void run() {
+            timePassed();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +76,7 @@ public class CalculMentalActivity extends AppCompatActivity {
         button9 = findViewById(R.id.button9);
         buttonEquals = findViewById(R.id.buttonEquals);
         buttonMinus = findViewById(R.id.buttonMinus);
+        buttonErase = findViewById(R.id.buttonErase);
 
         button0.setOnClickListener(v -> AppuieBoutonChiffre(0));
         button1.setOnClickListener(v -> AppuieBoutonChiffre(1));
@@ -77,9 +90,20 @@ public class CalculMentalActivity extends AppCompatActivity {
         button9.setOnClickListener(v -> AppuieBoutonChiffre(9));
         buttonEquals.setOnClickListener(v -> SubmitResult());
         buttonMinus.setOnClickListener(v -> OppositeResult());
+        buttonErase.setOnClickListener(v -> Erase());
 
         NouveauCalcul();
+        //TO DO: changer la valeur de delay
+        timer.schedule(timerTask, 5000);
     }
+
+    private void timePassed(){
+        //Redirection vers écran de résultat
+        //TO DO: changer l'activité
+        Intent intent = new Intent(this, CalculatriceActivity.class);
+        startActivity(intent);
+    }
+
 
     private void AppuieBoutonChiffre(Integer chiffre){
         input = input * 10 + chiffre;
@@ -108,11 +132,11 @@ public class CalculMentalActivity extends AppCompatActivity {
     private void SubmitResult(){
         if (input.equals(resultat)) {
             BonneReponse();
-            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Bonne réponse",Toast.LENGTH_SHORT).show();
         }
         else {
             MauvaiseReponse();
-            Toast.makeText(this,"Mauvaise réponse",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Mauvaise réponse",Toast.LENGTH_SHORT).show();
         }
 
         input = 0.0;
@@ -124,6 +148,12 @@ public class CalculMentalActivity extends AppCompatActivity {
 
         majTextView();
     }
+    private void Erase(){
+        input = 0.0;
+
+        majTextView();
+    }
+
     private void BonneReponse(){
         bonnesReponses++;
 
