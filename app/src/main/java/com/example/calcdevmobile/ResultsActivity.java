@@ -1,5 +1,6 @@
 package com.example.calcdevmobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,6 +32,9 @@ public class ResultsActivity extends AppCompatActivity {
             return insets;
         });
 
+        bonnesReponses = getIntent().getExtras().getInt("Bonnes Reponses");
+        mauvaisesReponses = getIntent().getExtras().getInt("Mauvaises Reponses");
+
         textViewRight = findViewById(R.id.textViewRight);
         textViewWrong = findViewById(R.id.textViewWrong);
         textViewPercentage = findViewById(R.id.textViewPercentage);
@@ -39,15 +43,21 @@ public class ResultsActivity extends AppCompatActivity {
 
         textViewRight.setText("Bonnes Réponses : " + bonnesReponses);
         textViewWrong.setText("Mauvaises Réponses : " + mauvaisesReponses);
-        textViewPercentage.setText("Pourcentage : " + bonnesReponses/mauvaisesReponses*100 + "%");
+        if (bonnesReponses + mauvaisesReponses > 0)
+            textViewPercentage.setText("Pourcentage : " + bonnesReponses/(bonnesReponses + mauvaisesReponses)*100 + "%");
+        else
+            textViewPercentage.setText("Pourcentage : 0%");
+
         buttonMiniGame.setOnClickListener(v -> MiniGame());
         buttonMenu.setOnClickListener(v -> Menu());
     }
 
     private void MiniGame(){
-
+        Intent intent = new Intent(this, CalculMentalActivity.class);
+        startActivity(intent);
     }
     private void Menu(){
-
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -94,7 +94,7 @@ public class CalculMentalActivity extends AppCompatActivity {
 
         NouveauCalcul();
         //TO DO: changer la valeur de delay
-        timer.schedule(timerTask, 5000);
+        timer.schedule(timerTask, 60000);
     }
 
     private void timePassed(){
