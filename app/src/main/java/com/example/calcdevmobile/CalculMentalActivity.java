@@ -99,8 +99,9 @@ public class CalculMentalActivity extends AppCompatActivity {
 
     private void timePassed(){
         //Redirection vers écran de résultat
-        //TO DO: changer l'activité
-        Intent intent = new Intent(this, CalculatriceActivity.class);
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putExtra("Bonnes Reponses", bonnesReponses);
+        intent.putExtra("Mauvaises Reponses", mauvaisesReponses);
         startActivity(intent);
     }
 
