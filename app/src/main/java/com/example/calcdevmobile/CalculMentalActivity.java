@@ -18,30 +18,20 @@ import java.util.TimerTask;
 public class CalculMentalActivity extends AppCompatActivity {
     private TextView textViewCalcul;
     private TextView textViewInput;
-    private Button button0;
-    private Button button1;
-    private Button button2;
-    private Button button3;
-    private Button button4;
-    private Button button5;
-    private Button button6;
-    private Button button7;
-    private Button button8;
-    private Button button9;
-    private Button buttonEquals;
-    private Button buttonMinus;
-    private Button buttonErase;
+    private Button button0, button1, button2, button3, button4;
+    private Button button5, button6, button7, button8, button9;
+    private Button buttonEquals, buttonMinus, buttonErase;
 
-
-    private Double input = 0.0;
-    private Double premierElement = 0.0;
-    private Double deuxiemeElement = 0.0;
-    private Double resultat = 0.0;
+    private int input = 0;
+    private int premierElement = 0;
+    private int deuxiemeElement = 0;
+    private int resultat = 0;
     private TypeOperation typeOperation;
+
+    private boolean isNegativeZero = false;
 
     private int bonnesReponses = 0;
     private int mauvaisesReponses = 0;
-
 
     private Timer timer = new Timer();
     private TimerTask timerTask = new TimerTask(){
@@ -98,22 +88,34 @@ public class CalculMentalActivity extends AppCompatActivity {
     }
 
     private void timePassed(){
-        //Redirection vers écran de résultat
         Intent intent = new Intent(this, ResultsActivity.class);
         intent.putExtra("Bonnes Reponses", bonnesReponses);
         intent.putExtra("Mauvaises Reponses", mauvaisesReponses);
         startActivity(intent);
     }
 
-
-    private void AppuieBoutonChiffre(Integer chiffre){
-        input = input * 10 + chiffre;
-
+    private void AppuieBoutonChiffre(int chiffre){
+        if (isNegativeZero) {
+            input = -chiffre;
+            isNegativeZero = false;
+        } else {
+            if (input < 0) {
+                input = input * 10 - chiffre;
+            } else {
+                input = input * 10 + chiffre;
+            }
+        }
         majTextView();
     }
+
     private void majTextView() {
-        textViewInput.setText(input.toString());
+        if (isNegativeZero) {
+            textViewInput.setText("-0");
+        } else {
+            textViewInput.setText(String.valueOf(input));
+        }
     }
+
     private void majCalcTextView(){
         switch(typeOperation){
             case ADD:
@@ -130,8 +132,9 @@ public class CalculMentalActivity extends AppCompatActivity {
                 break;
         }
     }
+
     private void SubmitResult(){
-        if (input.equals(resultat)) {
+        if (input == resultat) {
             BonneReponse();
             Toast.makeText(this,"Bonne réponse",Toast.LENGTH_SHORT).show();
         }
@@ -140,29 +143,35 @@ public class CalculMentalActivity extends AppCompatActivity {
             Toast.makeText(this,"Mauvaise réponse",Toast.LENGTH_SHORT).show();
         }
 
-        input = 0.0;
+        input = 0;
+        isNegativeZero = false;
         majTextView();
-        NouveauCalcul();
+
     }
+
     private void OppositeResult(){
-        input = -input;
+        if (input == 0) {
 
+            isNegativeZero = !isNegativeZero;
+        } else {
+            input = -input;
+        }
         majTextView();
     }
-    private void Erase(){
-        input = 0.0;
 
+    private void Erase(){
+        input = 0;
+        isNegativeZero = false;
         majTextView();
     }
 
     private void BonneReponse(){
         bonnesReponses++;
-
         NouveauCalcul();
     }
+
     private void MauvaiseReponse(){
         mauvaisesReponses++;
-
         NouveauCalcul();
     }
 
@@ -170,10 +179,10 @@ public class CalculMentalActivity extends AppCompatActivity {
         //0 - 99
         int premRNG = (int)(Math.random() * 100);
         int deuxRNG = (int)(Math.random() * 100);
-        //elements
-        premierElement = Double.valueOf(premRNG);
-        deuxiemeElement = Double.valueOf(deuxRNG);
-        //operation
+
+        premierElement = premRNG;
+        deuxiemeElement = deuxRNG;
+
         int operation = (int)(Math.random() * 3);
 
         switch (operation) {

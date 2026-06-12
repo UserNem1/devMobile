@@ -43,10 +43,14 @@ public class ResultsActivity extends AppCompatActivity {
 
         textViewRight.setText("Bonnes Réponses : " + bonnesReponses);
         textViewWrong.setText("Mauvaises Réponses : " + mauvaisesReponses);
-        if (bonnesReponses + mauvaisesReponses > 0)
-            textViewPercentage.setText("Pourcentage : " + bonnesReponses/(bonnesReponses + mauvaisesReponses)*100 + "%");
-        else
+
+        int total = bonnesReponses + mauvaisesReponses;
+        if (total > 0) {
+            int percentage = (bonnesReponses * 100) / total;
+            textViewPercentage.setText("Pourcentage : " + percentage + "%");
+        } else {
             textViewPercentage.setText("Pourcentage : 0%");
+        }
 
         buttonMiniGame.setOnClickListener(v -> MiniGame());
         buttonMenu.setOnClickListener(v -> Menu());
