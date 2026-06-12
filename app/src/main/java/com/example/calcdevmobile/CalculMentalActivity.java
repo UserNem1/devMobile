@@ -33,6 +33,9 @@ public class CalculMentalActivity extends AppCompatActivity {
     private int bonnesReponses = 0;
     private int mauvaisesReponses = 0;
 
+
+    private int difficulty = 0;
+
     private Timer timer = new Timer();
     private TimerTask timerTask = new TimerTask(){
         @Override
@@ -167,6 +170,11 @@ public class CalculMentalActivity extends AppCompatActivity {
 
     private void BonneReponse(){
         bonnesReponses++;
+
+        //Difficulté croissante
+        if((bonnesReponses > 3 && difficulty==0)||(bonnesReponses > 8 && difficulty==1)||(bonnesReponses > 18 && difficulty==2) && bonnesReponses/(bonnesReponses+mauvaisesReponses) > 50)
+            difficulty++;
+
         NouveauCalcul();
     }
 
@@ -176,9 +184,32 @@ public class CalculMentalActivity extends AppCompatActivity {
     }
 
     private void NouveauCalcul(){
-        //0 - 99
-        int premRNG = (int)(Math.random() * 100);
-        int deuxRNG = (int)(Math.random() * 100);
+        int premRNG;
+        int deuxRNG;
+
+        //Difficulté
+        switch(difficulty){
+            case 0:
+                //0-5
+                premRNG = (int)(Math.random() * 6);
+                deuxRNG = (int)(Math.random() * 6);
+                break;
+            case 1:
+                //0-15
+                premRNG = (int)(Math.random() * 16);
+                deuxRNG = (int)(Math.random() * 16);
+                break;
+            case 2:
+                //0-23
+                premRNG = (int)(Math.random() * 24);
+                deuxRNG = (int)(Math.random() * 24);
+                break;
+            default:
+                //0-30
+                premRNG = (int)(Math.random() * 31);
+                deuxRNG = (int)(Math.random() * 31);
+                break;
+        }
 
         premierElement = premRNG;
         deuxiemeElement = deuxRNG;
