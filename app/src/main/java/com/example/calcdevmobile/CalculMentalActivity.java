@@ -25,8 +25,11 @@ public class CalculMentalActivity extends AppCompatActivity {
     private int input = 0;
     private int premierElement = 0;
     private int deuxiemeElement = 0;
+    private int troisiemeElement = 0;
+    private boolean thirdElement = false;
     private int resultat = 0;
     private TypeOperation typeOperation;
+    private TypeOperation typeOperationBis;
 
     private boolean isNegativeZero = false;
 
@@ -86,7 +89,6 @@ public class CalculMentalActivity extends AppCompatActivity {
         buttonErase.setOnClickListener(v -> Erase());
 
         NouveauCalcul();
-        //TO DO: changer la valeur de delay
         timer.schedule(timerTask, 60000);
     }
 
@@ -120,19 +122,11 @@ public class CalculMentalActivity extends AppCompatActivity {
     }
 
     private void majCalcTextView(){
-        switch(typeOperation){
-            case ADD:
-                textViewCalcul.setText(premierElement + " + " + deuxiemeElement);
-                break;
-            case SUBSTRACT:
-                textViewCalcul.setText(premierElement + " - " + deuxiemeElement);
-                break;
-            case DIVIDE:
-                textViewCalcul.setText(premierElement + " / " + deuxiemeElement);
-                break;
-            case MULTIPLY:
-                textViewCalcul.setText(premierElement + " * " + deuxiemeElement);
-                break;
+        if(!thirdElement) {
+            textViewCalcul.setText(premierElement + typeOperation.getSymbole() + deuxiemeElement);
+        }
+        else {
+            textViewCalcul.setText(premierElement + typeOperation.getSymbole() + deuxiemeElement + typeOperationBis.getSymbole() + troisiemeElement);
         }
     }
 
@@ -154,7 +148,6 @@ public class CalculMentalActivity extends AppCompatActivity {
 
     private void OppositeResult(){
         if (input == 0) {
-
             isNegativeZero = !isNegativeZero;
         } else {
             input = -input;
@@ -172,8 +165,11 @@ public class CalculMentalActivity extends AppCompatActivity {
         bonnesReponses++;
 
         //Difficulté croissante
-        if((bonnesReponses > 3 && difficulty==0)||(bonnesReponses > 8 && difficulty==1)||(bonnesReponses > 18 && difficulty==2) && bonnesReponses/(bonnesReponses+mauvaisesReponses) > 50)
+        if((bonnesReponses > 3 && difficulty==0)||(bonnesReponses > 8 && difficulty==1)||(bonnesReponses > 18 && difficulty==2) && bonnesReponses/(bonnesReponses+mauvaisesReponses) > 50) {
             difficulty++;
+            if(difficulty == 3)
+                thirdElement = true;
+        }
 
         NouveauCalcul();
     }
@@ -186,6 +182,7 @@ public class CalculMentalActivity extends AppCompatActivity {
     private void NouveauCalcul(){
         int premRNG;
         int deuxRNG;
+        int troisRNG=0;
 
         //Difficulté
         switch(difficulty){
@@ -208,13 +205,17 @@ public class CalculMentalActivity extends AppCompatActivity {
                 //0-30
                 premRNG = (int)(Math.random() * 31);
                 deuxRNG = (int)(Math.random() * 31);
+                //0-15
+                troisRNG = (int)(Math.random() * 16);
                 break;
         }
 
         premierElement = premRNG;
         deuxiemeElement = deuxRNG;
+        troisiemeElement = (thirdElement)?troisRNG:0;
 
         int operation = (int)(Math.random() * 3);
+        int operationBis = (int)(Math.random() * 3);
 
         switch (operation) {
             case 0:
@@ -231,6 +232,24 @@ public class CalculMentalActivity extends AppCompatActivity {
                 break;
             default :
                 break;
+        }
+        if(thirdElement) {
+            switch (operationBis) {
+                case 0:
+                    resultat += troisiemeElement;
+                    typeOperationBis = TypeOperation.ADD;
+                    break;
+                case 1:
+                    resultat -= troisiemeElement;
+                    typeOperationBis = TypeOperation.SUBSTRACT;
+                    break;
+                case 2:
+                    resultat *= troisiemeElement;
+                    typeOperationBis = TypeOperation.MULTIPLY;
+                    break;
+                default:
+                    break;
+            }
         }
 
         majCalcTextView();
