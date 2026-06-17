@@ -2,4 +2,9 @@
 <resources>
     <string name="text_bouton_calculatrice">TestGerman</string>
     <string name="text_menu_raz">raz</string>
+
+    <!--Mini Game-->
+    <string name="rightAnswers">Gute Antworten : </string>
+    <string name="wrongAnswers">Falsche Antworten : </string>
+    <string name="ratio">Verhältnis : </string>
 </resources>

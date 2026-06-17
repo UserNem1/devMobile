@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_bouton_calculatrice">TestEnglish</string>
+    <string name="text_menu_raz">raz</string>
+
+    <!--Mini Game-->
+    <string name="rightAnswers">Right answers : </string>
+    <string name="wrongAnswers">Wrong answers : </string>
+    <string name="ratio">Ratio : </string>
+</resources>

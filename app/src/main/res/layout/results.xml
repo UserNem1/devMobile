@@ -22,21 +22,21 @@
                 android:id="@+id/textViewRight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/rightAnswers"
                 android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/textViewWrong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/wrongAnswers"
                 android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/textViewPercentage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/ratio"
                 android:textSize="25sp" />
         </LinearLayout>
 

@@ -21,7 +21,10 @@
     <string name="calc_9" translatable="false">9</string>
     <string name="text_menu_raz">raz</string>
 
-    <!--Historique-->
+    <!--Mini Game-->
+    <string name="rightAnswers">Bonnes réponses : </string>
+    <string name="wrongAnswers">Mauvaises réponses : </string>
+    <string name="ratio">Ratio : </string>
 
 
     <string name="next" translatable="false">Next</string>
