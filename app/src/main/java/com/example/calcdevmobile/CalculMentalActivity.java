@@ -97,6 +97,7 @@ public class CalculMentalActivity extends AppCompatActivity {
         intent.putExtra("Bonnes Reponses", bonnesReponses);
         intent.putExtra("Mauvaises Reponses", mauvaisesReponses);
         startActivity(intent);
+        finish();
     }
 
     private void AppuieBoutonChiffre(int chiffre){

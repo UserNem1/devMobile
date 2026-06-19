@@ -59,9 +59,9 @@ public class ResultsActivity extends AppCompatActivity {
     private void MiniGame(){
         Intent intent = new Intent(this, CalculMentalActivity.class);
         startActivity(intent);
+        finish();
     }
     private void Menu(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
